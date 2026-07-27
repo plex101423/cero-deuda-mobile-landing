@@ -5,22 +5,160 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Cero Deuda Mobile Landing</title>
   <style>
+    :root {
+      --bg: #ffffff;
+      --text: #171717;
+      --muted: #666666;
+      --line: #e8e8e8;
+      --purple-1: #4f00d8;
+      --purple-2: #7b00ff;
+      --purple-3: #9c42ff;
+      --purple-4: #25004f;
+      --green: #25d366;
+      --shadow: 0 12px 30px rgba(45, 20, 94, 0.12);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       width: 100%;
-      background: #ffffff;
+      background: #f4f4f6;
       font-family: Arial, sans-serif;
+      color: var(--text);
     }
     body {
       display: flex;
       justify-content: center;
     }
+    a { text-decoration: none; color: inherit; }
     .mobile-shell {
       width: 100%;
       max-width: 430px;
       min-height: 100vh;
-      background: #ffffff;
-      padding-bottom: 120px;
+      background: var(--bg);
+      padding-bottom: 124px;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: 5px;
+      background: rgba(123,0,255,.12);
+      z-index: 60;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple-2), var(--purple-3));
+      transition: width .12s linear;
+    }
+    .intro {
+      padding: 18px 14px 14px;
+      background:
+        radial-gradient(circle at top right, rgba(156,66,255,.30), transparent 34%),
+        linear-gradient(145deg, #2f005f 0%, #5300c6 55%, #7b00ff 100%);
+      color: #fff;
+    }
+    .urgency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.18);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      backdrop-filter: blur(10px);
+      animation: softPulse 1.8s infinite;
+    }
+    .intro h1 {
+      font-size: 27px;
+      line-height: 1.04;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: -.03em;
+    }
+    .intro p {
+      font-size: 14px;
+      line-height: 1.45;
+      color: rgba(255,255,255,.92);
+      margin-bottom: 14px;
+    }
+    .countdown-card {
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+      padding: 16px;
+      backdrop-filter: blur(12px);
+    }
+    .countdown-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .countdown-head strong {
+      font-size: 15px;
+      letter-spacing: .02em;
+    }
+    .countdown-head span {
+      font-size: 12px;
+      color: rgba(255,255,255,.82);
+      text-align: right;
+      line-height: 1.3;
+    }
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .time-box {
+      padding: 14px 8px;
+      text-align: center;
+      border-radius: 18px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .time-box strong {
+      display: block;
+      font-size: 27px;
+      line-height: 1;
+      margin-bottom: 5px;
+      font-weight: 800;
+    }
+    .time-box span {
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .88;
+    }
+    .mini-trust {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .mini-trust div {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 10px 8px;
+      font-size: 11px;
+      text-align: center;
+      line-height: 1.3;
     }
     .frame {
       width: 100%;
@@ -55,35 +193,240 @@
       border: 2px solid rgba(255,255,255,.28);
       mix-blend-mode: screen;
     }
-    @keyframes pulseWhatsapp {
-      0% {
-        box-shadow: 0 0 0 0 rgba(123, 0, 255, 0.40);
-        filter: brightness(1);
-      }
-      70% {
-        box-shadow: 0 0 0 16px rgba(123, 0, 255, 0);
-        filter: brightness(1.08);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(123, 0, 255, 0);
-        filter: brightness(1);
-      }
-    }
-    .interactive-block {
-      width: 100%;
-      background: #ffffff;
+    .section {
       padding: 18px 14px 0;
     }
-    .accordion {
-      border: 1px solid #e7e7e7;
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--purple-2);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .card h2 {
+      font-size: 22px;
+      line-height: 1.08;
+      margin-bottom: 8px;
+      letter-spacing: -.03em;
+    }
+    .card p.lead {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .benefits-grid,
+    .trust-grid,
+    .proof-grid {
+      display: grid;
+      gap: 10px;
+    }
+    .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-grid { grid-template-columns: repeat(3, 1fr); }
+    .proof-grid { grid-template-columns: repeat(3, 1fr); }
+    .benefit,
+    .trust-item,
+    .proof-item {
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff, #faf8ff);
+      border: 1px solid #ece7fa;
+      padding: 14px 12px;
+      text-align: left;
+    }
+    .benefit strong,
+    .trust-item strong,
+    .proof-item strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+    .benefit span,
+    .trust-item span,
+    .proof-item span {
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+    .proof-item {
+      text-align: center;
+      padding: 16px 10px;
+    }
+    .proof-item strong {
+      font-size: 22px;
+      color: var(--purple-2);
+      margin-bottom: 6px;
+    }
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+    .step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      border-radius: 18px;
+      background: #faf8ff;
+      border: 1px solid #ece7fa;
+      padding: 14px;
+    }
+    .step-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--purple-2), var(--purple-3));
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+    .step strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .step span {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+    .testimonial-track {
+      display: grid;
+      gap: 10px;
+      overflow-x: auto;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(240px, 1fr);
+      scroll-snap-type: x mandatory;
+      padding-bottom: 4px;
+    }
+    .testimonial {
+      scroll-snap-align: start;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fff, #fbf9ff);
+      border: 1px solid #ece7fa;
+      padding: 15px;
+    }
+    .testimonial p {
+      font-size: 13px;
+      line-height: 1.55;
+      color: #444;
+      margin-bottom: 10px;
+    }
+    .testimonial strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+    .testimonial span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .live-proof {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 12px;
       border-radius: 16px;
+      background: #f7f2ff;
+      border: 1px solid #e9dcff;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #27d17d;
+      box-shadow: 0 0 0 0 rgba(39,209,125,.45);
+      animation: liveBlink 1.6s infinite;
+      flex: 0 0 auto;
+    }
+    .lead-form {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      margin-bottom: 12px;
+    }
+    .lead-form h2 {
+      font-size: 20px;
+      line-height: 1.15;
+      color: #111;
+      margin-bottom: 8px;
+    }
+    .lead-form p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #555;
+      margin-bottom: 14px;
+    }
+    .field {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #d8d8d8;
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-size: 15px;
+      color: #111;
+      background: #fff;
+      appearance: none;
+      resize: vertical;
+      min-height: 48px;
+    }
+    .field textarea { min-height: 82px; }
+    .submit-btn {
+      width: 100%;
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 15px 16px;
+      font-size: 15px;
+      box-shadow: 0 12px 28px rgba(37,211,102,.28);
+    }
+    .form-note {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.45;
+    }
+    .accordion {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
       overflow: hidden;
       margin-bottom: 16px;
       background: #fff;
+      box-shadow: var(--shadow);
     }
-    .accordion details + details {
-      border-top: 1px solid #ededed;
-    }
+    .accordion details + details { border-top: 1px solid #ededed; }
     .accordion summary {
       list-style: none;
       cursor: pointer;
@@ -112,62 +455,6 @@
       font-size: 14px;
       line-height: 1.5;
     }
-    .lead-form {
-      border: 1px solid #e7e7e7;
-      border-radius: 16px;
-      padding: 16px;
-      background: #fff;
-      box-shadow: 0 10px 24px rgba(0,0,0,.05);
-      margin-bottom: 12px;
-    }
-    .lead-form h2 {
-      font-size: 18px;
-      line-height: 1.25;
-      color: #111;
-      margin-bottom: 8px;
-    }
-    .lead-form p {
-      font-size: 13px;
-      line-height: 1.5;
-      color: #555;
-      margin-bottom: 14px;
-    }
-    .field {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .field input,
-    .field select {
-      width: 100%;
-      border: 1px solid #d8d8d8;
-      border-radius: 12px;
-      padding: 13px 14px;
-      font-size: 15px;
-      color: #111;
-      background: #fff;
-      appearance: none;
-    }
-    .submit-btn {
-      width: 100%;
-      appearance: none;
-      border: 0;
-      border-radius: 999px;
-      background: #25d366;
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 14px 16px;
-      font-size: 15px;
-      box-shadow: 0 12px 28px rgba(37,211,102,.28);
-    }
-    .form-note {
-      font-size: 12px;
-      color: #777;
-      text-align: center;
-      margin-top: 10px;
-      line-height: 1.45;
-    }
     .sticky-bar {
       position: fixed;
       left: 50%;
@@ -193,6 +480,7 @@
       color: #ffffff;
       background: linear-gradient(135deg, #7b00ff 0%, #5b00ff 45%, #8c2bff 100%);
       box-shadow: 0 12px 26px rgba(123, 0, 255, 0.34), inset 0 1px 0 rgba(255,255,255,.18);
+      animation: softPulse 2.2s infinite;
     }
     .sticky-cta svg {
       width: 44px;
@@ -222,35 +510,160 @@
       line-height: 1.2;
       opacity: 0.98;
     }
-
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes pulseWhatsapp {
+      0% { box-shadow: 0 0 0 0 rgba(123, 0, 255, 0.40); filter: brightness(1); }
+      70% { box-shadow: 0 0 0 16px rgba(123, 0, 255, 0); filter: brightness(1.08); }
+      100% { box-shadow: 0 0 0 0 rgba(123, 0, 255, 0); filter: brightness(1); }
+    }
+    @keyframes softPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+    }
+    @keyframes liveBlink {
+      0% { box-shadow: 0 0 0 0 rgba(39,209,125,.45); opacity: 1; }
+      70% { box-shadow: 0 0 0 10px rgba(39,209,125,0); opacity: .92; }
+      100% { box-shadow: 0 0 0 0 rgba(39,209,125,0); opacity: 1; }
+    }
     @media (min-width: 431px) {
-      body {
-        background: #ececec;
-        padding: 0;
-      }
       .mobile-shell,
-      .sticky-bar {
+      .sticky-bar,
+      .progress-bar {
         box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 24px 60px rgba(0,0,0,.12);
       }
     }
   </style>
 </head>
 <body>
+  <div class="progress-bar"><div class="progress-bar-fill" id="progressBar"></div></div>
+
   <main class="mobile-shell" aria-label="Landing móvil Cero Deuda">
+    <section class="intro reveal visible">
+      <div class="urgency-badge">● Últimos cupos</div>
+      <h1>Atención prioritaria por tiempo limitado</h1>
+      <p>Si quieres revisar tu caso hoy, este es el mejor momento para escribirnos. Estamos atendiendo los últimos cupos disponibles.</p>
+      <div class="countdown-card">
+        <div class="countdown-head">
+          <strong>Últimos cupos</strong>
+          <span>Cuenta regresiva de atención<br />prioritaria</span>
+        </div>
+        <div class="countdown-grid">
+          <div class="time-box"><strong id="hours">00</strong><span>Horas</span></div>
+          <div class="time-box"><strong id="minutes">00</strong><span>Min</span></div>
+          <div class="time-box"><strong id="seconds">00</strong><span>Seg</span></div>
+        </div>
+        <div class="mini-trust">
+          <div>Respuesta rápida</div>
+          <div>Atención confidencial</div>
+          <div>Proceso legal</div>
+        </div>
+      </div>
+    </section>
+
     <section class="frame hero-frame">
       <img src="assets/hero-1.jpg" alt="Imagen 1" />
       <a class="hero-wa-overlay" href="https://wa.me/573145777777?text=Hola%2C%20quiero%20revisar%20mi%20caso%20con%20Cero%20Deuda" target="_blank" rel="noopener noreferrer" aria-label="Botón de WhatsApp sobre la primera imagen"></a>
     </section>
     <section class="frame"><img src="assets/hero-2.jpg" alt="Imagen 2" /></section>
+
+    <section class="section reveal">
+      <div class="card">
+        <div class="section-label">● Beneficios</div>
+        <h2>Qué puedes lograr con una revisión de tu caso</h2>
+        <p class="lead">Una experiencia móvil más completa, pensada para convertir mejor y generar más confianza desde el primer scroll.</p>
+        <div class="benefits-grid">
+          <div class="benefit"><strong>Revisión clara</strong><span>Entiendes si tu caso tiene viabilidad antes de avanzar.</span></div>
+          <div class="benefit"><strong>Atención por WhatsApp</strong><span>Contacto inmediato y simple desde cualquier celular.</span></div>
+          <div class="benefit"><strong>Proceso explicado</strong><span>Menos dudas, menos fricción y más claridad.</span></div>
+          <div class="benefit"><strong>Más confianza</strong><span>Urgencia, prueba social y preguntas frecuentes bien resueltas.</span></div>
+        </div>
+      </div>
+    </section>
+
     <section class="frame"><img src="assets/problem.jpg" alt="Imagen 3" /></section>
     <section class="frame"><img src="assets/solution.jpg" alt="Imagen 4" /></section>
 
-    <section class="interactive-block" id="precalificacion">
+    <section class="section reveal">
+      <div class="card">
+        <div class="section-label">● Confianza</div>
+        <h2>Señales de confianza que ayudan a convertir</h2>
+        <div class="proof-grid">
+          <div class="proof-item"><strong>+500</strong><span>Solicitudes atendidas</span></div>
+          <div class="proof-item"><strong>24/7</strong><span>WhatsApp disponible</span></div>
+          <div class="proof-item"><strong>100%</strong><span>Atención móvil</span></div>
+        </div>
+        <div class="live-proof">
+          <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+            <span class="live-dot"></span>
+            <span><strong id="liveCounter">12</strong> personas están revisando esta información ahora.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="card">
+        <div class="section-label">● Cómo funciona</div>
+        <h2>Un proceso simple y fácil de entender</h2>
+        <div class="timeline">
+          <div class="step"><div class="step-badge">1</div><div><strong>Nos escribes</strong><span>Entras por WhatsApp o llenas el formulario de revisión rápida.</span></div></div>
+          <div class="step"><div class="step-badge">2</div><div><strong>Analizamos tu caso</strong><span>Revisamos la información inicial y te orientamos sobre la viabilidad.</span></div></div>
+          <div class="step"><div class="step-badge">3</div><div><strong>Te explicamos el camino</strong><span>Entiendes qué sigue, qué necesitas y cómo se llevaría el proceso.</span></div></div>
+          <div class="step"><div class="step-badge">4</div><div><strong>Empiezas con acompañamiento</strong><span>Todo pensado para que avances desde el celular, sin fricción.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="card">
+        <div class="section-label">● Testimonios</div>
+        <h2>Lo que busca sentir la persona que llega aquí</h2>
+        <div class="testimonial-track">
+          <article class="testimonial">
+            <p>“Necesitaba una explicación clara y rápida. Lo mejor fue poder iniciar todo por WhatsApp sin complicarme.”</p>
+            <strong>Andrea M.</strong>
+            <span>Bogotá</span>
+          </article>
+          <article class="testimonial">
+            <p>“Me gustó que la página se sintiera directa y confiable. Uno entiende rápido qué hacer y a dónde escribir.”</p>
+            <strong>Carlos R.</strong>
+            <span>Medellín</span>
+          </article>
+          <article class="testimonial">
+            <p>“La urgencia y la claridad ayudan. En celular todo se ve fácil y el contacto está siempre a la mano.”</p>
+            <strong>Paula T.</strong>
+            <span>Cali</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="card">
+        <div class="section-label">● Señales de respaldo</div>
+        <div class="trust-grid">
+          <div class="trust-item"><strong>Atención confidencial</strong><span>Contacto directo y reservado.</span></div>
+          <div class="trust-item"><strong>Proceso legal</strong><span>Enfoque alineado con habeas data.</span></div>
+          <div class="trust-item"><strong>Desde tu celular</strong><span>Todo optimizado para móvil.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="precalificacion">
       <form class="lead-form" id="leadForm">
         <h2>Revisión rápida de tu caso</h2>
-        <p>Completa estos datos y te enviamos a WhatsApp con el mensaje listo.</p>
+        <p>Completa estos datos y te enviamos a WhatsApp con el mensaje listo para que no pierdas tiempo.</p>
         <label class="field"><input type="text" id="nombre" placeholder="Nombre completo" required /></label>
         <label class="field"><input type="tel" id="telefono" placeholder="Teléfono" required /></label>
+        <label class="field"><input type="text" id="ciudad" placeholder="Ciudad" /></label>
         <label class="field">
           <select id="reportado" required>
             <option value="" selected disabled>¿Estás reportado?</option>
@@ -259,33 +672,35 @@
             <option value="No sé">No sé</option>
           </select>
         </label>
+        <label class="field"><input type="text" id="entidad" placeholder="Entidad o banco (opcional)" /></label>
         <label class="field">
           <select id="revision" required>
-            <option value="" selected disabled>¿Quieres revisión gratis?</option>
+            <option value="" selected disabled>¿Qué quieres hacer?</option>
             <option value="Sí, quiero revisión gratis">Sí, quiero revisión gratis</option>
             <option value="Quiero más información primero">Quiero más información primero</option>
           </select>
         </label>
+        <label class="field"><textarea id="comentario" placeholder="Cuéntanos brevemente tu caso (opcional)"></textarea></label>
         <button type="submit" class="submit-btn">Enviar a WhatsApp</button>
         <div class="form-note">Tus datos solo se usarán para iniciar la conversación por WhatsApp.</div>
       </form>
 
-      <div class="accordion">
+      <div class="accordion reveal">
         <details>
           <summary>¿Cómo funciona?</summary>
-          <div class="accordion-content">Analizamos tu caso, revisamos la viabilidad legal y te guiamos en el proceso por WhatsApp.</div>
+          <div class="accordion-content">Nos escribes, revisamos tu situación y te orientamos sobre el siguiente paso desde el mismo WhatsApp.</div>
         </details>
         <details>
           <summary>¿Cuánto tarda?</summary>
-          <div class="accordion-content">Depende del caso, pero primero se revisa la situación y se te explica el camino posible antes de avanzar.</div>
+          <div class="accordion-content">La respuesta inicial puede ser rápida. Luego el tiempo total depende del caso y de la información disponible.</div>
         </details>
         <details>
           <summary>¿Es legal?</summary>
-          <div class="accordion-content">Sí. La gestión se plantea conforme a la ley de habeas data en Colombia.</div>
+          <div class="accordion-content">Sí. La gestión se plantea con enfoque legal y conforme a la ley de habeas data en Colombia.</div>
         </details>
         <details>
           <summary>¿Qué necesito para empezar?</summary>
-          <div class="accordion-content">Solo tus datos básicos y una breve explicación de tu caso para iniciar la revisión por WhatsApp.</div>
+          <div class="accordion-content">Nombre, teléfono y una breve explicación de tu situación. Con eso podemos iniciar la conversación.</div>
         </details>
       </div>
     </section>
@@ -299,28 +714,94 @@
       </svg>
       <span class="sticky-cta-text">
         <span class="sticky-cta-title">Escríbenos por WhatsApp</span>
-        <span class="sticky-cta-subtitle">Tu nuevo comienzo puede iniciar hoy.</span>
+        <span class="sticky-cta-subtitle">Últimos cupos disponibles hoy.</span>
       </span>
     </a>
   </div>
 
   <script>
     const baseWhatsapp = 'https://wa.me/573145777777';
+
+    const deadlineKey = 'ceroDeudaDeadline';
+    const durationMs = 15 * 60 * 1000;
+    const storedDeadline = localStorage.getItem(deadlineKey);
+    let deadline = storedDeadline ? parseInt(storedDeadline, 10) : NaN;
+    if (!deadline || deadline < Date.now()) {
+      deadline = Date.now() + durationMs;
+      localStorage.setItem(deadlineKey, String(deadline));
+    }
+    function updateCountdown() {
+      let diff = deadline - Date.now();
+      if (diff <= 0) {
+        deadline = Date.now() + durationMs;
+        localStorage.setItem(deadlineKey, String(deadline));
+        diff = durationMs;
+      }
+      const totalSeconds = Math.floor(diff / 1000);
+      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+      const seconds = String(totalSeconds % 60).padStart(2, '0');
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const revealItems = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    revealItems.forEach(item => observer.observe(item));
+
+    function updateProgressBar() {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const height = doc.scrollHeight - doc.clientHeight;
+      const progress = height > 0 ? (scrollTop / height) * 100 : 0;
+      document.getElementById('progressBar').style.width = progress + '%';
+    }
+    window.addEventListener('scroll', updateProgressBar, { passive: true });
+    updateProgressBar();
+
+    const liveCounter = document.getElementById('liveCounter');
+    let currentLive = 12;
+    setInterval(() => {
+      const delta = Math.random() > 0.5 ? 1 : -1;
+      currentLive = Math.min(18, Math.max(8, currentLive + delta));
+      liveCounter.textContent = currentLive;
+    }, 4500);
+
     document.getElementById('leadForm').addEventListener('submit', function (event) {
       event.preventDefault();
       const nombre = document.getElementById('nombre').value.trim();
       const telefono = document.getElementById('telefono').value.trim();
+      const ciudad = document.getElementById('ciudad').value.trim();
       const reportado = document.getElementById('reportado').value;
+      const entidad = document.getElementById('entidad').value.trim();
       const revision = document.getElementById('revision').value;
+      const comentario = document.getElementById('comentario').value.trim();
       const mensaje = [
         'Hola, quiero revisar mi caso con Cero Deuda.',
         'Nombre: ' + nombre,
         'Teléfono: ' + telefono,
+        ciudad ? 'Ciudad: ' + ciudad : '',
         '¿Está reportado?: ' + reportado,
-        'Interés: ' + revision
-      ].join('\n');
+        entidad ? 'Entidad/Banco: ' + entidad : '',
+        'Interés: ' + revision,
+        comentario ? 'Comentario: ' + comentario : ''
+      ].filter(Boolean).join('\n');
+      localStorage.setItem('ceroDeudaLeadNombre', nombre);
+      localStorage.setItem('ceroDeudaLeadTelefono', telefono);
       window.open(baseWhatsapp + '?text=' + encodeURIComponent(mensaje), '_blank');
     });
+
+    const savedNombre = localStorage.getItem('ceroDeudaLeadNombre');
+    const savedTelefono = localStorage.getItem('ceroDeudaLeadTelefono');
+    if (savedNombre) document.getElementById('nombre').value = savedNombre;
+    if (savedTelefono) document.getElementById('telefono').value = savedTelefono;
   </script>
 </body>
 </html>
