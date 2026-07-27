@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Cero Deuda Mobile Landing</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      background: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+    }
+    .mobile-shell {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      background: #ffffff;
+    }
+    .frame {
+      width: 100%;
+      line-height: 0;
+    }
+    .frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    @media (min-width: 431px) {
+      body {
+        background: #ececec;
+        padding: 0;
+      }
+      .mobile-shell {
+        box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 24px 60px rgba(0,0,0,.12);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="mobile-shell" aria-label="Landing móvil Cero Deuda">
+    <section class="frame"><img src="assets/hero-1.jpg" alt="Imagen 1" /></section>
+    <section class="frame"><img src="assets/hero-2.jpg" alt="Imagen 2" /></section>
+    <section class="frame"><img src="assets/problem.jpg" alt="Imagen 3" /></section>
+    <section class="frame"><img src="assets/solution.jpg" alt="Imagen 4" /></section>
+  </main>
+</body>
+</html>
