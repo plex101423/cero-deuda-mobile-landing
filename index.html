@@ -31,6 +31,44 @@
       height: auto;
       display: block;
     }
+    .hero-frame {
+      position: relative;
+    }
+    .hero-wa-overlay {
+      position: absolute;
+      left: 4.5%;
+      right: 4.5%;
+      bottom: 1.8%;
+      height: 8.5%;
+      border-radius: 999px;
+      z-index: 3;
+      background: linear-gradient(135deg, rgba(123, 0, 255, 0.14), rgba(90, 20, 255, 0.08));
+      box-shadow: 0 0 0 0 rgba(123, 0, 255, 0.42);
+      animation: pulseWhatsapp 1.8s infinite;
+      transform: translateZ(0);
+    }
+    .hero-wa-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,.28);
+      mix-blend-mode: screen;
+    }
+    @keyframes pulseWhatsapp {
+      0% {
+        box-shadow: 0 0 0 0 rgba(123, 0, 255, 0.40);
+        filter: brightness(1);
+      }
+      70% {
+        box-shadow: 0 0 0 16px rgba(123, 0, 255, 0);
+        filter: brightness(1.08);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(123, 0, 255, 0);
+        filter: brightness(1);
+      }
+    }
     .interactive-block {
       width: 100%;
       background: #ffffff;
@@ -199,7 +237,10 @@
 </head>
 <body>
   <main class="mobile-shell" aria-label="Landing móvil Cero Deuda">
-    <section class="frame"><img src="assets/hero-1.jpg" alt="Imagen 1" /></section>
+    <section class="frame hero-frame">
+      <img src="assets/hero-1.jpg" alt="Imagen 1" />
+      <a class="hero-wa-overlay" href="https://wa.me/573145777777?text=Hola%2C%20quiero%20revisar%20mi%20caso%20con%20Cero%20Deuda" target="_blank" rel="noopener noreferrer" aria-label="Botón de WhatsApp sobre la primera imagen"></a>
+    </section>
     <section class="frame"><img src="assets/hero-2.jpg" alt="Imagen 2" /></section>
     <section class="frame"><img src="assets/problem.jpg" alt="Imagen 3" /></section>
     <section class="frame"><img src="assets/solution.jpg" alt="Imagen 4" /></section>
