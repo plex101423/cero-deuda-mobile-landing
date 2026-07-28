@@ -108,14 +108,19 @@
       width: 100%;
       line-height: 0;
       position: relative;
+      isolation: isolate;
     }
     .slide + .slide {
-      margin-top: -3px;
+      margin-top: -16px;
     }
     .slide img {
       width: 100%;
       height: auto;
       display: block;
+    }
+    .slide + .slide img {
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0px, rgba(0,0,0,.2) 8px, rgba(0,0,0,.75) 16px, #000 28px);
+      mask-image: linear-gradient(to bottom, transparent 0px, rgba(0,0,0,.2) 8px, rgba(0,0,0,.75) 16px, #000 28px);
     }
     .img-overlay {
       position: absolute;
