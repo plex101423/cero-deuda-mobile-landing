@@ -38,15 +38,13 @@
       justify-content: center;
     }
     .top-counter {
-      width: auto;
-      min-width: 280px;
-      max-width: 360px;
+      width: 100%;
       border-radius: 18px;
       text-decoration: none;
       color: #fff;
       background: linear-gradient(135deg,#6717ff 0%,#7b00ff 42%,#35b6ff 100%);
       box-shadow: 0 12px 28px rgba(103,23,255,.28);
-      padding: 10px 14px;
+      padding: 10px 12px;
       text-align: center;
     }
     .top-counter-label {
@@ -173,6 +171,7 @@
           <div class="top-counter-box"><strong id="july-days">00</strong><span>Días</span></div>
           <div class="top-counter-box"><strong id="july-hours">00</strong><span>Horas</span></div>
           <div class="top-counter-box"><strong id="july-minutes">00</strong><span>Min</span></div>
+          <div class="top-counter-box"><strong id="july-seconds">00</strong><span>Seg</span></div>
         </div>
       </div>
     </div>
@@ -207,16 +206,18 @@
       const julyEnd = new Date(now.getFullYear(), 7, 1, 0, 0, 0, 0);
       let diff = julyEnd - now;
       if (diff < 0) diff = 0;
-      const totalMinutes = Math.floor(diff / 60000);
-      const days = Math.floor(totalMinutes / (60 * 24));
-      const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
-      const minutes = totalMinutes % 60;
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
       document.getElementById('july-days').textContent = String(days).padStart(2, '0');
       document.getElementById('july-hours').textContent = String(hours).padStart(2, '0');
       document.getElementById('july-minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('july-seconds').textContent = String(seconds).padStart(2, '0');
     }
     updateJulyCounter();
-    setInterval(updateJulyCounter, 60000);
+    setInterval(updateJulyCounter, 1000);
   </script>
 </body>
 </html>
