@@ -133,6 +133,19 @@
       border-radius: 999px;
       border: 2px solid rgba(255,255,255,.22);
     }
+    .bottom-cta {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      z-index: 40;
+      width: 100%;
+      max-width: 430px;
+      padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(255,255,255,.96);
+      border-top: 1px solid rgba(0,0,0,.07);
+      backdrop-filter: blur(8px);
+    }
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(103,23,255,.28); filter: brightness(1); }
       70% { box-shadow: 0 0 0 16px rgba(103,23,255,0); filter: brightness(1.06); }
@@ -155,7 +168,7 @@
     </div>
 
     <section class="slides">
-      <div class="slide"><img src="assets/12.jpg" alt="Imagen 12" /><a class="img-overlay" href="https://wa.me/573145777777?text=Hola%2C%20quiero%20analizar%20mi%20caso%20por%20WhatsApp" target="_blank" rel="noopener noreferrer" aria-label="CTA imagen 12"></a></div>
+      <div class="slide"><img src="assets/12.jpg" alt="Imagen 12" /></div>
       <div class="slide"><img src="assets/11.jpg" alt="Imagen 11" /><a class="img-overlay" href="https://wa.me/573145777777?text=Hola%2C%20quiero%20hablar%20con%20un%20asesor" target="_blank" rel="noopener noreferrer" aria-label="CTA imagen 11"></a></div>
       <div class="slide"><img src="assets/10.jpg" alt="Imagen 10" /></div>
       <div class="slide"><img src="assets/09.jpg" alt="Imagen 09" /></div>
@@ -169,6 +182,13 @@
       <div class="slide"><img src="assets/01.jpg" alt="Imagen 01" /><a class="img-overlay" href="https://wa.me/573145777777?text=Hola%2C%20quiero%20resolver%20mis%20dudas%20con%20Cero%20Deuda" target="_blank" rel="noopener noreferrer" aria-label="CTA imagen 01"></a></div>
     </section>
   </main>
+
+  <div class="bottom-cta">
+    <a href="https://wa.me/573145777777?text=Hola%2C%20quiero%20analizar%20mi%20caso%20por%20WhatsApp" target="_blank" rel="noopener noreferrer" aria-label="Analizar mi caso por WhatsApp">
+      <svg class="icon-wa" viewBox="0 0 32 32" aria-hidden="true"><path d="M19.11 17.23c-.27-.13-1.6-.79-1.85-.88-.25-.09-.43-.13-.61.13-.18.27-.7.88-.86 1.06-.16.18-.31.2-.58.07-.27-.13-1.12-.41-2.13-1.31-.79-.7-1.33-1.57-1.48-1.84-.16-.27-.02-.41.11-.54.12-.12.27-.31.4-.47.13-.16.18-.27.27-.45.09-.18.04-.34-.02-.47-.07-.13-.61-1.48-.83-2.03-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.27s.97 2.64 1.11 2.82c.13.18 1.91 2.92 4.63 4.09.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.6-.65 1.82-1.28.22-.63.22-1.17.16-1.28-.07-.11-.25-.18-.52-.31Z"></path><path d="M16.01 3.2c-6.98 0-12.65 5.67-12.65 12.64 0 2.23.58 4.41 1.69 6.33L3.2 28.8l6.8-1.79a12.61 12.61 0 0 0 6.01 1.53h.01c6.97 0 12.64-5.67 12.64-12.65 0-3.38-1.31-6.56-3.71-8.95A12.55 12.55 0 0 0 16.01 3.2Zm0 23.21h-.01c-1.86 0-3.69-.5-5.28-1.45l-.38-.22-4.03 1.06 1.08-3.93-.25-.4a10.47 10.47 0 0 1-1.61-5.63c0-5.78 4.7-10.48 10.49-10.48 2.8 0 5.44 1.09 7.42 3.07a10.4 10.4 0 0 1 3.06 7.42c0 5.79-4.7 10.49-10.49 10.49Z"></path></svg>
+      Analizar mi caso por WhatsApp
+    </a>
+  </div>
 
   <script>
     function updateJulyCounter() {
